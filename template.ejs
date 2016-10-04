@@ -15,20 +15,20 @@
 
   <script>
     (function () {
-      var menuDisplayed = false
-      var menuBtn       = document.getElementById('menu-btn')
-      var site          = document.getElementById('site')
-      var sidebar       = document.getElementById('sidebar')
+      var menuDisplayed = false;
+      var menuBtn = document.getElementById('menu-btn');
+      var site = document.getElementById('site');
+      var sidebar = document.getElementById('sidebar');
 
       function toggleNav(displayed) {
-        menuDisplayed = displayed
+        menuDisplayed = displayed;
         menuDisplayed
           ? site.classList.add('nav-displayed')
           : site.classList.remove('nav-displayed')
       }
 
       function toggleSubItem (parent) {
-        var isOpen = parent.classList.contains('sidebar-item--open')
+        var isOpen = parent.classList.contains('sidebar-item--open');
 
         isOpen
           ? parent.classList.remove('sidebar-item--open')
@@ -37,7 +37,7 @@
 
       menuBtn.addEventListener('click', function () {
         toggleNav(!menuDisplayed)
-      })
+      });
 
       sidebar.addEventListener('click', function (event) {
         if (event.target.matches('.sidebar-item__toggle')) {
@@ -45,7 +45,12 @@
         }
 
         if (event.target.matches('.sidebar-item__link')) {
-          toggleNav(false)
+          event.preventDefault();
+          toggleNav(false);
+
+          setTimeout(function () {
+            window.location = event.target.href;
+          }, 0)
         }
       });
     }())
