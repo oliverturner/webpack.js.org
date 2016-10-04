@@ -18,17 +18,16 @@
       var menuDisplayed = false
       var menuBtn       = document.getElementById('menu-btn')
       var site          = document.getElementById('site')
-      var subItems      = document.querySelectorAll('.sidebar-item__toggle')
+      var sidebar       = document.getElementById('sidebar')
 
-      menuBtn.addEventListener('click', function () {
-        menuDisplayed = !menuDisplayed
+      function toggleNav(displayed) {
+        menuDisplayed = displayed
         menuDisplayed
           ? site.classList.add('nav-displayed')
           : site.classList.remove('nav-displayed')
-      })
+      }
 
-      function toggleSubItem (event) {
-        var parent = event.target.parentNode
+      function toggleSubItem (parent) {
         var isOpen = parent.classList.contains('sidebar-item--open')
 
         isOpen
@@ -36,9 +35,19 @@
           : parent.classList.add('sidebar-item--open')
       }
 
-      Array.from(subItems).map(function (el) {
-        el.addEventListener('click', toggleSubItem)
+      menuBtn.addEventListener('click', function () {
+        toggleNav(!menuDisplayed)
       })
+
+      sidebar.addEventListener('click', function (event) {
+        if (event.target.matches('.sidebar-item__toggle')) {
+          toggleSubItem(event.target.parentNode)
+        }
+
+        if (event.target.matches('.sidebar-item__link')) {
+          toggleNav(false)
+        }
+      });
     }())
   </script>
 </html>

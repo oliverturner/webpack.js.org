@@ -3,7 +3,7 @@ import Link from './Link';
 
 const Sidebar = ({ sectionName, pages }) => {
   return (
-    <nav className="sidebar">
+    <nav id="sidebar" className="sidebar">
       <div className="sidebar__inner">
         <Item url={ `/${sectionName}` } title="Introduction" />
         {
@@ -44,7 +44,7 @@ class Item extends Component {
           {
             anchors.map((anchor, j) => (
               <li className="sidebar-item__anchor" key={ `anchor-${index}-${j}` }>
-                <Link to={ `${url}#${anchor.id}` }>{ anchor.title }</Link>
+                <Link className="sidebar-item__link" to={ `${url}#${anchor.id}` }>{ anchor.title }</Link>
               </li>
             ))
           }
